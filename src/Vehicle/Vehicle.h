@@ -353,6 +353,8 @@ public:
     Q_PROPERTY(QString              hobbsMeter              READ hobbsMeter                                             NOTIFY hobbsMeterChanged)
     Q_PROPERTY(bool                 vtolInFwdFlight         READ vtolInFwdFlight        WRITE setVtolInFwdFlight        NOTIFY vtolInFwdFlightChanged)
     Q_PROPERTY(bool                 highLatencyLink         READ highLatencyLink                                        NOTIFY highLatencyLinkChanged)
+    Q_PROPERTY(QStringList          linkNames               READ linkNames                                              NOTIFY linkNamesChanged)
+    Q_PROPERTY(QString              priorityLinkName        READ priorityLinkName       WRITE setPriorityLinkByName     NOTIFY priorityLinkNameChanged)
 
     // Vehicle state used for guided control
     Q_PROPERTY(bool flying                  READ flying NOTIFY flyingChanged)                               ///< Vehicle is flying
@@ -547,6 +549,10 @@ public:
     QStringList flightModes(void);
     QString flightMode(void) const;
     void setFlightMode(const QString& flightMode);
+
+    QStringList linkNames(void) const;
+    QString priorityLinkName(void) const;
+    void setPriorityLinkByName(const QString& priorityLinkName);
 
     bool hilMode(void);
     void setHilMode(bool hilMode);
@@ -789,6 +795,8 @@ signals:
     void capabilityBitsChanged(uint64_t capabilityBits);
     void toolBarIndicatorsChanged(void);
     void highLatencyLinkChanged(bool highLatencyLink);
+    void linkNamesChanged(void);
+    void priorityLinkNameChanged(const QString& priorityLinkName);
 
     void messagesReceivedChanged    ();
     void messagesSentChanged        ();
