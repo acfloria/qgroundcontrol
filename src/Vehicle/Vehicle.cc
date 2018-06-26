@@ -2475,6 +2475,7 @@ void Vehicle::setConnectionLostEnabled(bool connectionLostEnabled)
 {
     if (_connectionLostEnabled != connectionLostEnabled) {
         _connectionLostEnabled = connectionLostEnabled;
+        qWarning() << "_connectionLostEnabled changed, new: " << _connectionLostEnabled;
         emit connectionLostEnabledChanged(_connectionLostEnabled);
     }
 }
@@ -2523,6 +2524,8 @@ void Vehicle::_linkActiveChanged(LinkInterface *link, bool active, int vehicleID
 
                     disconnectInactiveVehicle();
                 }
+            } else {
+                qWarning() << "_connectionLostEnabled is false";
             }
         }
     } else {

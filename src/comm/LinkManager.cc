@@ -1009,5 +1009,8 @@ void LinkManager::_freeMavlinkChannel(int channel)
 }
 
 void LinkManager::_mavlinkMessageReceived(LinkInterface* link, mavlink_message_t message) {
+    if (message.msgid == 0) {
+        qWarning() << "Mavlink message heartbeat" << message.msgid;
+    }
     link->startMavlinkMessagesTimer(message.sysid);
 }
