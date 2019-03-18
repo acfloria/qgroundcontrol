@@ -165,6 +165,7 @@ Rectangle {
                     } else {
                         editConfig = QGroundControl.linkManager.createConfiguration(LinkConfiguration.TypeUdp,    "Unnamed")
                     }
+                    // check if mqtt needs to go in here
                 }
             }
             Component.onDestruction: {

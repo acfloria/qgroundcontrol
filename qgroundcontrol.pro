@@ -406,14 +406,14 @@ HEADERS += \
     src/api/QGCSettings.h \
     src/api/QmlComponentInfo.h \
     src/comm/MavlinkMessagesTimer.h \
-    src/GPS/Drivers/src/base_station.h
+    src/GPS/Drivers/src/base_station.h \
 
 SOURCES += \
     src/api/QGCCorePlugin.cc \
     src/api/QGCOptions.cc \
     src/api/QGCSettings.cc \
     src/api/QmlComponentInfo.cc \
-    src/comm/MavlinkMessagesTimer.cc
+    src/comm/MavlinkMessagesTimer.cc \
 
 #
 # Unit Test specific configuration goes here (requires full debug build with all plugins)
@@ -621,6 +621,7 @@ HEADERS += \
     src/comm/QGCMAVLink.h \
     src/comm/TCPLink.h \
     src/comm/UDPLink.h \
+    src/comm/MQTTLink.h \
     src/comm/UdpIODevice.h \
     src/uas/UAS.h \
     src/uas/UASInterface.h \
@@ -823,6 +824,7 @@ SOURCES += \
     src/comm/QGCMAVLink.cc \
     src/comm/TCPLink.cc \
     src/comm/UDPLink.cc \
+    src/comm/MQTTLink.cc \
     src/comm/UdpIODevice.cc \
     src/main.cc \
     src/uas/UAS.cc \

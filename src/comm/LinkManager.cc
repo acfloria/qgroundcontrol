@@ -18,6 +18,7 @@
 
 #include "LinkManager.h"
 #include "QGCApplication.h"
+#include "MQTTLink.h"
 #include "UDPLink.h"
 #include "TCPLink.h"
 #include "SettingsManager.h"
@@ -134,6 +135,8 @@ LinkInterface* LinkManager::createConnectedLink(SharedLinkConfigurationPointer& 
     case LinkConfiguration::TypeTcp:
         pLink = new TCPLink(config);
         break;
+    case LinkConfiguration::TypeMqtt:
+        pLink = new MQTTLink(config);
 #ifdef QGC_ENABLE_BLUETOOTH
     case LinkConfiguration::TypeBluetooth:
         pLink = new BluetoothLink(config);
@@ -388,6 +391,9 @@ void LinkManager::loadLinkConfigurationList()
                             case LinkConfiguration::TypeTcp:
                                 pLink = dynamic_cast<LinkConfiguration*>(new TCPConfiguration(name));
                                 break;
+                            case LinkConfiguration::TypeMqtt:
+                                pLink = dynamic_cast<LinkConfiguration*>(new MQTTConfiguration(name));
+                                break;
 #ifdef QGC_ENABLE_BLUETOOTH
                             case LinkConfiguration::TypeBluetooth:
                                 pLink = dynamic_cast<LinkConfiguration*>(new BluetoothConfiguration(name));
@@ -479,6 +485,7 @@ void LinkManager::_updateAutoConnectLinks(void)
         createConnectedLink(config);
         emit linkConfigurationsChanged();
     }
+    // TODO check if support for the mqtt link is required?
 #ifndef __mobile__
 #ifndef NO_SERIAL_LINK
     // check to see if nmea gps is configured for UDP input, if so, set it up to connect
@@ -838,6 +845,8 @@ void LinkManager::_fixUnnamed(LinkConfiguration* config)
                 }
             }
                 break;
+            case LinkConfiguration::TypeMqtt:
+                config->setName("MQTT Link TOPICNAME TODO");
 #ifdef QGC_ENABLE_BLUETOOTH
             case LinkConfiguration::TypeBluetooth: {
                 BluetoothConfiguration* tconfig = dynamic_cast<BluetoothConfiguration*>(config);

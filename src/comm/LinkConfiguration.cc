@@ -18,6 +18,7 @@
 #ifndef NO_SERIAL_LINK
 #include "SerialLink.h"
 #endif
+#include "MQTTLink.h"
 #include "UDPLink.h"
 #include "TCPLink.h"
 #if !defined(__mobile__)
@@ -93,6 +94,9 @@ LinkConfiguration* LinkConfiguration::createSettings(int type, const QString& na
         case LinkConfiguration::TypeTcp:
             config = new TCPConfiguration(name);
             break;
+        case LinkConfiguration::TypeMqtt:
+            config = new MQTTConfiguration(name);
+            break;
 #ifdef QGC_ENABLE_BLUETOOTH
     case LinkConfiguration::TypeBluetooth:
         config = new BluetoothConfiguration(name);
@@ -131,6 +135,9 @@ LinkConfiguration* LinkConfiguration::duplicateSettings(LinkConfiguration* sourc
         case TypeTcp:
             dupe = new TCPConfiguration(dynamic_cast<TCPConfiguration*>(source));
             break;
+        case TypeMqtt:
+            dupe = new MQTTConfiguration(dynamic_cast<MQTTConfiguration*>(source));
+        break;
 #ifdef QGC_ENABLE_BLUETOOTH
         case TypeBluetooth:
             dupe = new BluetoothConfiguration(dynamic_cast<BluetoothConfiguration*>(source));
